@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="15400" systemVersion="18G103" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="DOB" representedClassName="CEManagedDOB" parentEntity="Person" syncable="YES">
+        <attribute name="age" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="person" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Person" inverseName="dob" inverseEntity="Person"/>
+    </entity>
+    <entity name="Name" representedClassName="CEManagedName" parentEntity="Person" syncable="YES">
+        <attribute name="first" optional="YES" attributeType="String"/>
+        <attribute name="last" optional="YES" attributeType="String"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
+        <relationship name="person" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Person" inverseName="rName" inverseEntity="Person"/>
+    </entity>
+    <entity name="Page" representedClassName="CEManagedPage" parentEntity="Random" syncable="YES">
+        <attribute name="items" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="number" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="random" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Random" inverseName="page" inverseEntity="Random"/>
+    </entity>
+    <entity name="Person" representedClassName="CEManagedPerson" parentEntity="Random" syncable="YES">
+        <attribute name="email" optional="YES" attributeType="String"/>
+        <attribute name="gender" optional="YES" attributeType="String"/>
+        <attribute name="nat" optional="YES" attributeType="String"/>
+        <relationship name="dob" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DOB" inverseName="person" inverseEntity="DOB"/>
+        <relationship name="picture" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Picture" inverseName="person" inverseEntity="Picture"/>
+        <relationship name="random" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Random" inverseName="persons" inverseEntity="Random"/>
+        <relationship name="rName" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Name" inverseName="person" inverseEntity="Name"/>
+    </entity>
+    <entity name="Picture" representedClassName="CEManagedPicture" parentEntity="Person" syncable="YES">
+        <attribute name="large" optional="YES" attributeType="String"/>
+        <attribute name="thumbnail" optional="YES" attributeType="String"/>
+        <relationship name="person" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Person" inverseName="picture" inverseEntity="Person"/>
+    </entity>
+    <entity name="Random" representedClassName="CEManagedRandom" isAbstract="YES" syncable="YES">
+        <relationship name="page" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Page" inverseName="random" inverseEntity="Page"/>
+        <relationship name="persons" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Person" inverseName="random" inverseEntity="Person"/>
+    </entity>
+    <elements>
+        <element name="DOB" positionX="-639.34765625" positionY="-272.17578125" width="128" height="88"/>
+        <element name="Name" positionX="-633.70703125" positionY="-51.796875" width="128" height="118"/>
+        <element name="Page" positionX="-193.76953125" positionY="-218.63671875" width="128" height="88"/>
+        <element name="Person" positionX="-460.58203125" positionY="-218.60546875" width="128" height="148"/>
+        <element name="Picture" positionX="-636.921875" positionY="-163.69140625" width="128" height="88"/>
+        <element name="Random" positionX="-305.8515625" positionY="-424.3984375" width="128" height="43"/>
+    </elements>
+</model>
