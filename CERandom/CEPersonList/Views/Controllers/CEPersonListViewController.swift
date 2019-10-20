@@ -9,7 +9,6 @@
 import UIKit
 
 class CEPersonListViewController: UITableViewController {
-    
     private var searchController: UISearchController = UISearchController()
     var viewModel: CEPersonViewModelProtocol?
     
@@ -22,21 +21,17 @@ class CEPersonListViewController: UITableViewController {
     }
 }
 
+// MARK: - CEListContextProtocol
 private extension CEPersonListViewController {
     func isMoreLoading(for indexPath: IndexPath) -> Bool {
         return indexPath.row >= viewModel?.currentList ?? 0
-    }
-    
-    func visibleIndexPathsToReload(intersecting indexPaths: [IndexPath]) -> [IndexPath] {
-        let indexPathsForVisibleRows = tableView.indexPathsForVisibleRows ?? []
-        let indexPathsIntersection = Set(indexPathsForVisibleRows).intersection(indexPaths)
-        return Array(indexPathsIntersection)
     }
     func configureViews() {
         tableView?.register(CEPersonListCell.nib,
                             forCellReuseIdentifier: CEPersonListCell.reuseIdentifier)
         tableView.estimatedRowHeight = UITableView.automaticDimension
         tableView.rowHeight = UITableView.automaticDimension
+        tableView.tableFooterView = UIView(frame: .zero)
         
         searchController = ({
             let controller = UISearchController(searchResultsController: nil)
@@ -46,12 +41,12 @@ private extension CEPersonListViewController {
             controller.searchBar.barStyle = UIBarStyle.black
             controller.searchBar.barTintColor = UIColor.white
             controller.searchBar.backgroundColor = UIColor.clear
+            definesPresentationContext = true
             tableView.tableHeaderView = controller.searchBar
             return controller
         })()
     }
 }
-
 
 // MARK: - Table view datasource; delegate; prefetching
 extension CEPersonListViewController: UITableViewDataSourcePrefetching {
@@ -76,7 +71,13 @@ extension CEPersonListViewController: UITableViewDataSourcePrefetching {
         }
         return cell
     }
-
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let controller = UIStoryboard.main.makeInstant(CEPersonDetailViewController.self) {
+            searchController.searchBar
+            controller.personInfo = viewModel?.getPerson(at: indexPath.row)
+            navigationController?.pushViewController(controller, animated: true)
+        }
+    }
     func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
         if indexPaths.contains(where: isMoreLoading) && viewModel?.reachedMaximum != true {
             viewModel?.startLiveLoading()
@@ -84,11 +85,8 @@ extension CEPersonListViewController: UITableViewDataSourcePrefetching {
     }
 }
 
+// MARK: - CEListContextProtocol
 extension CEPersonListViewController: CEListContextProtocol {
-    func onImageFetch(with image: UIImage?, for path: IndexPath) {
-        
-    }
-    
     func didSuccessFetching(with indexSet: [IndexPath]?) {
         guard let newIndexPathsToReload = indexSet else {
             tableView.reloadData()
@@ -98,13 +96,13 @@ extension CEPersonListViewController: CEListContextProtocol {
         tableView.insertRows(at: newIndexPathsToReload, with: .automatic)
         tableView.endUpdates()
     }
-    
     func didFindSearch(list indexSet: [IndexPath]?) {
         // Note: Will use update later
         tableView.reloadData()
     }
 }
 
+// MARK: - CEListContextProtocol
 extension CEPersonListViewController: UISearchBarDelegate {
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         viewModel?.startSearching(for: .none)

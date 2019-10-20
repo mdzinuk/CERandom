@@ -17,11 +17,11 @@ public enum CEError: Error {
     var localizedDescription: String {
         switch self {
         case .network:
-            return "An error occurred during the networking operations"
+            return "No internet connection"
         case .decoding:
-            return "An error occurred while decoding data"
+            return "CECodable serialized error"
         case .coredata:
-            return "An error occurred during the coredata operation"
+            return "Coredata error"
         case .url:
             return "Url is broken"
         }

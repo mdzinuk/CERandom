@@ -8,9 +8,10 @@
 
 import UIKit
 
-
 protocol CEServiceProtocol: class {
-    func fetchPeople(for params: [String: String], completion: @escaping(CEServiceReply<Random, CEError>) -> Void)
+    func fetchPeople(for params: CEStringDictionary,
+                     completion: @escaping(CEServiceReply<Random, CEError>) -> Void)
+    func downloadImage(for url: String,
+                       completion: @escaping (CEServiceReply<UIImage, CEError>) -> Void)
     func fetchPeopleFromCoreData(completion: @escaping(CEServiceReply<[Random.Person], CEError>) -> Void)
-    func downloadImage(for url: String, completion: @escaping (CEServiceReply<UIImage, CEError>) -> Void)
 }

@@ -9,17 +9,29 @@
 import UIKit
 
 class CEPersonDetailViewController: UIViewController {
+    @IBOutlet weak var photoView: UIImageView!
     @IBOutlet weak var fullName: UILabel!
     @IBOutlet weak var dobLabel: UILabel!
     @IBOutlet weak var genderLabel: UILabel!
     @IBOutlet weak var natLabel: UILabel!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
+    var personInfo: PersonInfo?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        fullName.text = "Full Name: "
-        dobLabel.text = "DOB: "
-        genderLabel.text = "Gender: "
-        natLabel.text = "Nat: "
+        fullName.text = personInfo?.fullName
+        dobLabel.text = personInfo?.birthday
+        genderLabel.text = personInfo?.contact
+        natLabel.text = "....................."
+        
+        CEPersonDetailViewModel()
+            .getLargeImage(from: personInfo?.pictureLink ?? "") { (image: UIImage?) in
+                DispatchQueue.main.async { [weak self] in
+                    self?.activityIndicator.stopAnimating()
+                    self?.photoView.image = image
+                }
+        }
     }
 }

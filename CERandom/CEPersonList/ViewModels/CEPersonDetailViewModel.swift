@@ -6,4 +6,18 @@
 //  Copyright © 2019 Mohammad Arafat Hossain. All rights reserved.
 //
 
-import Foundation
+import UIKit
+
+final class CEPersonDetailViewModel: CEPersonDetailViewModelProtocol {
+    init() { }
+    func getLargeImage(from link: String, completion: @escaping (UIImage?) -> Void) {
+        CEService().downloadImage(for: link, completion: { (result: CEServiceReply<UIImage, CEError>) in
+            switch result {
+            case .failure( _):
+                completion(.none)
+            case .success(let image):
+                completion(image)
+            }
+        })
+    }
+}

@@ -43,3 +43,24 @@ struct Random: Codable {
         }
     }
 }
+
+protocol PersonInfo {
+    var fullName: String { get }
+    var birthday: String { get }
+    var contact: String { get }
+    var pictureLink: String { get }
+}
+extension Random.Person: PersonInfo {
+    var fullName: String {
+        return "Name: \(name.title). \(name.first) \(name.last)"
+    }
+    var birthday: String {
+        return "Born in: \(DateFormatter.toString(dob.date))"
+    }
+    var contact: String {
+        return "Email: \(email ?? "") \nGender: \(gender ?? "") \nNationality: \(nat ?? "")"
+    }
+    var pictureLink: String {
+        return picture.large
+    }
+}

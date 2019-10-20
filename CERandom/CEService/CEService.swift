@@ -9,7 +9,8 @@
 import UIKit
 
 class CEService: CEServiceProtocol {
-    func fetchPeople(for params: [String: String], completion: @escaping(CEServiceReply<Random, CEError>) -> Void) {
+    func fetchPeople(for params: CEStringDictionary,
+                     completion: @escaping(CEServiceReply<Random, CEError>) -> Void) {
         CENetworkManager
             .shared()
             .dataTask(for: params) { (result: CEServiceReply<Data, CEError>) in
@@ -27,7 +28,8 @@ class CEService: CEServiceProtocol {
                 }
         }
     }
-    func downloadImage(for url: String, completion: @escaping (CEServiceReply<UIImage, CEError>) -> Void) {
+    func downloadImage(for url: String,
+                       completion: @escaping (CEServiceReply<UIImage, CEError>) -> Void) {
         CENetworkManager
             .shared()
             .dataTask(from: url) { (result: CEServiceReply<Data, CEError>) in
@@ -44,7 +46,7 @@ class CEService: CEServiceProtocol {
         }
     }
     func fetchPeopleFromCoreData(completion: @escaping(CEServiceReply<[Random.Person], CEError>) -> Void) {
-        DispatchQueue.main.async { [unowned self] in
+        DispatchQueue.main.async {
             CECoreDataManager
                 .shared()
                 .retrieve { (coreData: CEServiceReply<[Random.Person], CEError>) in

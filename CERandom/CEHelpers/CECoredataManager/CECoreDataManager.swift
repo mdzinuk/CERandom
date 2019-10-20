@@ -18,26 +18,25 @@ public class CECoreDataManager {
         let container = NSPersistentContainer(name: "CERandomUsers")
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {
-                fatalError("Unresolved error \(error), \(error.userInfo)")
+                print("\(CEError.coredata.localizedDescription) \(error.userInfo)")
             }
         })
         return container
     }()
+    class func shared() -> CECoreDataManager {
+        return sharedCoreDataManager
+    }
+    
     private func saveContext () {
         let context = getContext()
         if context.hasChanges {
             do {
                 try context.save()
             } catch {
-                let nserror = error as NSError
-                fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+                print(CEError.coredata.localizedDescription)
             }
         }
     }
-    class func shared() -> CECoreDataManager {
-        return sharedCoreDataManager
-    }
-    
     private func getContext() -> NSManagedObjectContext {
         return persistentContainer.viewContext
     }
@@ -52,32 +51,23 @@ public class CECoreDataManager {
     }
     func retrieve(from completion: @escaping(CEServiceReply<[Random.Person], CEError>) -> Void) {
         do {
-            var persons: [Random.Person] = []
             let context = getContext()
             let result = try context.fetch(CEManagedPerson.buildRequest())
-            for managedPerson in result {
-                print(managedPerson.getPerson() ?? "")
-                if let person = managedPerson.getPerson() {
-                    persons.append(person)
-                }
-            }
-            completion(CEServiceReply.success(persons))
+            completion(CEServiceReply.success(result.compactMap{ $0.getPerson() }))
         } catch {
             completion(CEServiceReply.failure(CEError.coredata))
         }
     }
-    
     func deleteRecords() {
         DispatchQueue.main.async { [weak self] in
             if let context = self?.getContext() {
                 let deleteFetch = NSFetchRequest<NSFetchRequestResult>(entityName: CEManagedRandom.entityName())
                 let deleteRequest = NSBatchDeleteRequest(fetchRequest: deleteFetch)
-
                 do {
                     try context.execute(deleteRequest)
                     self?.saveContext()
                 } catch {
-                    print ("There was an error")
+                    print(CEError.coredata.localizedDescription)
                 }
             }
         }

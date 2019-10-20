@@ -13,11 +13,11 @@ public enum CEServiceReply<T, U> {
     case failure(U)
 }
 
-public typealias CENetworkParam = [String: String]
+public typealias CEStringDictionary = [String: String]
 public typealias CENetworkResponseData = (CEServiceReply<Data, CEError>)
 
 extension URLRequest {
-    func encode(with parameters: CENetworkParam?) -> URLRequest {
+    func encode(with parameters: CEStringDictionary?) -> URLRequest {
         guard let parameters = parameters else {
             return self
         }

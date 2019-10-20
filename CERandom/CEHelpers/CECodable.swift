@@ -28,7 +28,6 @@ struct CECodable<T: Codable>: Codable {
         return dict
     }
 }
-
 fileprivate extension JSONDecoder {
     func extraDecode<T: Codable>(_ type: T.Type, for data: Data) throws -> T {
         dateDecodingStrategy = .custom({ (decoder) -> Date in

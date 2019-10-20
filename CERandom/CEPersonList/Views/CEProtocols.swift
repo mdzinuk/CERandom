@@ -9,7 +9,6 @@
 import UIKit
 
 protocol CEListContextProtocol: class {
-    func onImageFetch(with image: UIImage?, for path: IndexPath)
     func didSuccessFetching(with indexSet: [IndexPath]?)
     func didFailFetching(with reason: String)
     func didFindSearch(list indexSet: [IndexPath]?)
@@ -24,6 +23,9 @@ protocol CEPersonViewModelProtocol {
     func startSearching(for searchText: String?)
     func getPerson(at index: Int) -> Random.Person
     func getImage(from link: String, completion: @escaping (UIImage?) -> Void)
+}
+protocol CEPersonDetailViewModelProtocol {
+    func getLargeImage(from link: String, completion: @escaping (UIImage?) -> Void)
 }
 
 extension CEListContextProtocol where Self: UIViewController {
