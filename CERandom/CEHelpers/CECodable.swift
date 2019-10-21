@@ -8,6 +8,7 @@
 
 import Foundation
 
+// MARK: CECodable
 struct CECodable<T: Codable>: Codable {
     static func decode(from data: Any?) -> T? {
         guard let data = data as? Data else {
@@ -28,6 +29,8 @@ struct CECodable<T: Codable>: Codable {
         return dict
     }
 }
+
+// MARK: JSONDecoder extension
 fileprivate extension JSONDecoder {
     func extraDecode<T: Codable>(_ type: T.Type, for data: Data) throws -> T {
         dateDecodingStrategy = .custom({ (decoder) -> Date in
@@ -37,7 +40,7 @@ fileprivate extension JSONDecoder {
                 return date
             }
             throw DecodingError.dataCorruptedError(in: container,
-                                                   debugDescription: "Cannot decode \(dateStr) string")
+                                                   debugDescription: "\(CEError.decoding.localizedDescription) for \(dateStr) string")
         })
         return try decode(type, from: data)
     }

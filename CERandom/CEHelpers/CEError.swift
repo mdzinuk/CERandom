@@ -8,6 +8,7 @@
 
 import Foundation
 
+// MARK: CEError
 public enum CEError: Error {
     case network
     case url

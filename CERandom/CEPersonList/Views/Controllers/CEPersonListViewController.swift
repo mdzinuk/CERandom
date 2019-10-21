@@ -73,7 +73,6 @@ extension CEPersonListViewController: UITableViewDataSourcePrefetching {
     }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let controller = UIStoryboard.main.makeInstant(CEPersonDetailViewController.self) {
-            searchController.searchBar
             controller.personInfo = viewModel?.getPerson(at: indexPath.row)
             navigationController?.pushViewController(controller, animated: true)
         }

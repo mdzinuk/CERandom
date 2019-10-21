@@ -8,14 +8,16 @@
 
 import Foundation
 
+public typealias CEStringDictionary = [String: String]
+public typealias CENetworkResponseData = (CEServiceReply<Data, CEError>)
+
+// MARK: CEServiceReply Value type
 public enum CEServiceReply<T, U> {
     case success(T)
     case failure(U)
 }
 
-public typealias CEStringDictionary = [String: String]
-public typealias CENetworkResponseData = (CEServiceReply<Data, CEError>)
-
+// MARK: URLRequest extension
 extension URLRequest {
     func encode(with parameters: CEStringDictionary?) -> URLRequest {
         guard let parameters = parameters else {
@@ -38,6 +40,7 @@ extension URLRequest {
     }
 }
 
+// MARK: HTTPURLResponse extension
 extension HTTPURLResponse {
     var hasSuccessCode: Bool {
         return 200...299 ~= statusCode

@@ -12,22 +12,23 @@ final class CEPersonViewModel {
     weak var viewContext: CEListContextProtocol?
     private var service: CEServiceProtocol?
     
-    // Note: Pagignation, will move to new class
+    // NOTE: Pagignation, will move to new class
     private var availablePersons: [Random.Person] = []
     private var currentPage = 1
     private var totalPersons = 0
     private var isFetchInProgress = false
     private var isFetchingAllowed = true
     
-    //Mark: Searching
+    // MARK: Searching
     private var isSearching = false
     private var filteredPersons : [Random.Person] = []
     
     private static let maximumPageToReload = 10
     private static let maximumListAllowed = 15
     
-    init(context: CEListContextProtocol) {
+    init(context: CEListContextProtocol, _ service: CEServiceProtocol? = CEService()) {
         viewContext = context
+        self.service = service
     }
     private func modifiedIndeces(from newList: [Random.Person]) -> [IndexPath] {
         let startIndex = availablePersons.count - newList.count
@@ -36,7 +37,7 @@ final class CEPersonViewModel {
     }
 }
 
-//Mark: CEPersonViewModelProtocol
+// MARK: CEPersonViewModelProtocol
 extension CEPersonViewModel: CEPersonViewModelProtocol {
     var total: Int {
         return isSearching ? filteredPersons.count : totalPersons + 1
@@ -48,8 +49,6 @@ extension CEPersonViewModel: CEPersonViewModelProtocol {
         return !isFetchingAllowed
     }
     func startLiveLoading() {
-        if service == nil { service = CEService() }
-        
         if currentPage > CEPersonViewModel.maximumPageToReload {
             isFetchingAllowed = false
         }
@@ -57,7 +56,10 @@ extension CEPersonViewModel: CEPersonViewModelProtocol {
         guard !isFetchInProgress && isFetchingAllowed else { return }
         isFetchInProgress = true
         
-        let params:CEStringDictionary = ["page": "\(currentPage)", "nat":"gb","results":"\(CEPersonViewModel.maximumListAllowed)"]
+        let params:CEStringDictionary = ["page": "\(currentPage)",
+            "nat":"gb",
+            "results":"\(CEPersonViewModel.maximumListAllowed)"]
+        
         service?.fetchPeople(for: params) { (result: CEServiceReply<Random, CEError>) in
             switch result {
             case .failure(let error):
@@ -76,8 +78,8 @@ extension CEPersonViewModel: CEPersonViewModelProtocol {
                     strongSelf.availablePersons.append(contentsOf: list.persons)
                     strongSelf.totalPersons += list.persons.count
                     if list.page.number > 1 {
-                        let indexPathsToReload = strongSelf.modifiedIndeces(from: list.persons)
-                        strongSelf.viewContext?.didSuccessFetching(with: indexPathsToReload)
+                        let indexSet = strongSelf.modifiedIndeces(from: list.persons)
+                        strongSelf.viewContext?.didSuccessFetching(with: indexSet)
                     } else {
                         strongSelf.viewContext?.didSuccessFetching(with: .none)
                     }
@@ -86,8 +88,6 @@ extension CEPersonViewModel: CEPersonViewModelProtocol {
         }
     }
     func startStoredLoading() {
-        if service == nil { service = CEService() }
-        
         service?.fetchPeopleFromCoreData(completion: { (result: CEServiceReply<[Random.Person], CEError>) in
             switch result {
             case .failure(let error):
@@ -101,8 +101,8 @@ extension CEPersonViewModel: CEPersonViewModelProtocol {
                     strongSelf.availablePersons.append(contentsOf: list)
                     strongSelf.totalPersons += list.count
                     
-                    let indexPathsToReload = strongSelf.modifiedIndeces(from: list)
-                    strongSelf.viewContext?.didSuccessFetching(with: indexPathsToReload)
+                    let indexSet = strongSelf.modifiedIndeces(from: list)
+                    strongSelf.viewContext?.didSuccessFetching(with: indexSet)
                 }
             }
         })
@@ -129,7 +129,6 @@ extension CEPersonViewModel: CEPersonViewModelProtocol {
         }
     }
     func getImage(from link: String, completion: @escaping (UIImage?) -> Void) {
-        if service == nil { service = CEService() }
         service?.downloadImage(for: link, completion: { (result: CEServiceReply<UIImage, CEError>) in
             switch result {
             case .failure( _):

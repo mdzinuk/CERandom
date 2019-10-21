@@ -8,6 +8,7 @@
 
 import Foundation
 
+// MARK: Random Model
 struct Random: Codable {
     let persons: [Person]
     let page: Page
@@ -44,6 +45,7 @@ struct Random: Codable {
     }
 }
 
+// MARK: PersonInfo Protocol
 protocol PersonInfo {
     var fullName: String { get }
     var birthday: String { get }

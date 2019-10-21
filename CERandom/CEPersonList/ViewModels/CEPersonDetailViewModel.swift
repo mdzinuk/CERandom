@@ -9,9 +9,14 @@
 import UIKit
 
 final class CEPersonDetailViewModel: CEPersonDetailViewModelProtocol {
-    init() { }
+    private var service: CEServiceProtocol?
+    
+    init(_ service: CEServiceProtocol? = CEService()) {
+        self.service = service
+    }
+    
     func getLargeImage(from link: String, completion: @escaping (UIImage?) -> Void) {
-        CEService().downloadImage(for: link, completion: { (result: CEServiceReply<UIImage, CEError>) in
+        service?.downloadImage(for: link, completion: { (result: CEServiceReply<UIImage, CEError>) in
             switch result {
             case .failure( _):
                 completion(.none)

@@ -12,7 +12,7 @@
 		86A7D151235BB24000C1A6BB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 86A7D14F235BB24000C1A6BB /* Main.storyboard */; };
 		86A7D153235BB24100C1A6BB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 86A7D152235BB24100C1A6BB /* Assets.xcassets */; };
 		86A7D156235BB24100C1A6BB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 86A7D154235BB24100C1A6BB /* LaunchScreen.storyboard */; };
-		86A7D161235BB24100C1A6BB /* CERandomTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A7D160235BB24100C1A6BB /* CERandomTests.swift */; };
+		86A7D161235BB24100C1A6BB /* CEPersonListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A7D160235BB24100C1A6BB /* CEPersonListTests.swift */; };
 		86A7D16E235BB49300C1A6BB /* CEPersonListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A7D16D235BB49300C1A6BB /* CEPersonListViewController.swift */; };
 		86A7D174235BB9CD00C1A6BB /* CEProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A7D173235BB9CD00C1A6BB /* CEProtocols.swift */; };
 		86A7D176235BBF5600C1A6BB /* CEModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A7D175235BBF5600C1A6BB /* CEModels.swift */; };
@@ -64,6 +64,11 @@
 		86A7D1CC235C19E400C1A6BB /* CEPersonDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A7D1CB235C19E400C1A6BB /* CEPersonDetailViewController.swift */; };
 		86A7D1CE235C5E9900C1A6BB /* CEPersonDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A7D1CD235C5E9900C1A6BB /* CEPersonDetailViewModel.swift */; };
 		86A7D1CF235C5E9900C1A6BB /* CEPersonDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A7D1CD235C5E9900C1A6BB /* CEPersonDetailViewModel.swift */; };
+		86A7D1D0235D990D00C1A6BB /* CECodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A7D178235BBFA500C1A6BB /* CECodable.swift */; };
+		86A7D1D1235D991C00C1A6BB /* CEModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A7D175235BBF5600C1A6BB /* CEModels.swift */; };
+		86A7D1D2235D992E00C1A6BB /* CEProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A7D173235BB9CD00C1A6BB /* CEProtocols.swift */; };
+		86A7D1D4235DA4FD00C1A6BB /* CEBaseTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A7D1D3235DA4FD00C1A6BB /* CEBaseTestCase.swift */; };
+		86A7D1D6235DA8C200C1A6BB /* CEPersonDetailTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A7D1D5235DA8C200C1A6BB /* CEPersonDetailTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,7 +90,7 @@
 		86A7D155235BB24100C1A6BB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		86A7D157235BB24100C1A6BB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		86A7D15C235BB24100C1A6BB /* CERandomTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CERandomTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		86A7D160235BB24100C1A6BB /* CERandomTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CERandomTests.swift; sourceTree = "<group>"; };
+		86A7D160235BB24100C1A6BB /* CEPersonListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CEPersonListTests.swift; sourceTree = "<group>"; };
 		86A7D162235BB24100C1A6BB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		86A7D16D235BB49300C1A6BB /* CEPersonListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CEPersonListViewController.swift; sourceTree = "<group>"; };
 		86A7D173235BB9CD00C1A6BB /* CEProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CEProtocols.swift; sourceTree = "<group>"; };
@@ -116,6 +121,8 @@
 		86A7D1C6235BED6500C1A6BB /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
 		86A7D1CB235C19E400C1A6BB /* CEPersonDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CEPersonDetailViewController.swift; sourceTree = "<group>"; };
 		86A7D1CD235C5E9900C1A6BB /* CEPersonDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CEPersonDetailViewModel.swift; sourceTree = "<group>"; };
+		86A7D1D3235DA4FD00C1A6BB /* CEBaseTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CEBaseTestCase.swift; sourceTree = "<group>"; };
+		86A7D1D5235DA8C200C1A6BB /* CEPersonDetailTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CEPersonDetailTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -173,7 +180,9 @@
 		86A7D15F235BB24100C1A6BB /* CERandomTests */ = {
 			isa = PBXGroup;
 			children = (
-				86A7D160235BB24100C1A6BB /* CERandomTests.swift */,
+				86A7D1D3235DA4FD00C1A6BB /* CEBaseTestCase.swift */,
+				86A7D160235BB24100C1A6BB /* CEPersonListTests.swift */,
+				86A7D1D5235DA8C200C1A6BB /* CEPersonDetailTests.swift */,
 				86A7D162235BB24100C1A6BB /* Info.plist */,
 			);
 			path = CERandomTests;
@@ -437,22 +446,27 @@
 				86A7D1AD235BED5600C1A6BB /* _CEManagedPerson.swift in Sources */,
 				86A7D196235BD39F00C1A6BB /* CENetworkManager.swift in Sources */,
 				86A7D199235BD59700C1A6BB /* CENetworkManager+Extension.swift in Sources */,
+				86A7D1D1235D991C00C1A6BB /* CEModels.swift in Sources */,
 				86A7D1BB235BED5600C1A6BB /* CEManagedName.swift in Sources */,
 				86A7D1BF235BED5600C1A6BB /* CEManagedRandom.swift in Sources */,
 				86A7D19C235BD6DE00C1A6BB /* CEError.swift in Sources */,
+				86A7D1D2235D992E00C1A6BB /* CEProtocols.swift in Sources */,
 				86A7D18D235BD0CB00C1A6BB /* CEService.swift in Sources */,
 				86A7D193235BD12E00C1A6BB /* CEHelperProtocols+Extension.swift in Sources */,
 				86A7D1B5235BED5600C1A6BB /* _CEManagedRandom.swift in Sources */,
 				86A7D190235BD0F700C1A6BB /* CEServiceProtocol.swift in Sources */,
+				86A7D1D0235D990D00C1A6BB /* CECodable.swift in Sources */,
 				86A7D1B1235BED5600C1A6BB /* _CEManagedPicture.swift in Sources */,
+				86A7D1D4235DA4FD00C1A6BB /* CEBaseTestCase.swift in Sources */,
 				86A7D1B7235BED5600C1A6BB /* CEManagedPerson.swift in Sources */,
 				86A7D1CF235C5E9900C1A6BB /* CEPersonDetailViewModel.swift in Sources */,
 				86A7D1C8235BED6500C1A6BB /* CECoreDataManager.swift in Sources */,
 				86A7D1CA235BED6500C1A6BB /* CERandomUsers.xcdatamodeld in Sources */,
 				86A7D1AF235BED5600C1A6BB /* _CEManagedDOB.swift in Sources */,
-				86A7D161235BB24100C1A6BB /* CERandomTests.swift in Sources */,
+				86A7D161235BB24100C1A6BB /* CEPersonListTests.swift in Sources */,
 				86A7D1C3235BED5600C1A6BB /* _CEManagedPage.swift in Sources */,
 				86A7D1B9235BED5600C1A6BB /* CEManagedDOB.swift in Sources */,
+				86A7D1D6235DA8C200C1A6BB /* CEPersonDetailTests.swift in Sources */,
 				86A7D17C235BC49500C1A6BB /* CEPersonViewModel.swift in Sources */,
 				86A7D1C1235BED5600C1A6BB /* CEManagedPage.swift in Sources */,
 			);

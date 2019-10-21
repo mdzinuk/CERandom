@@ -8,12 +8,15 @@
 
 import UIKit
 
+// MARK: CEReusableView + extension
 protocol CEReusableView: class {
     static var reuseIdentifier: String { get }
 }
 protocol CEReusableViewNibLoading: CEReusableView {
     static var nib: UINib { get }
 }
+
+// MARK: CEReusableView + extension
 extension CEReusableView {
     static var reuseIdentifier: String {
         return String(describing: self)
@@ -24,6 +27,7 @@ extension CEReusableViewNibLoading {
         return UINib(nibName: String(describing: self), bundle: Bundle(for: self))
     }
 }
+// MARK: DateFormatter extension
 extension DateFormatter {
     static func isoDate(_ dateString: String) -> Date? {
         let dateFormatter = DateFormatter()
@@ -37,6 +41,8 @@ extension DateFormatter {
         return dateFormatter.string(from: date)
     }
 }
+
+// MARK: UIStoryboard extension
 extension UIStoryboard {
     static let main = UIStoryboard(name: "Main", bundle: nil)
     func makeInstant<T>(_ identifier: T.Type) -> T? {
